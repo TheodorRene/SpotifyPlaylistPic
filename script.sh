@@ -29,5 +29,11 @@ convert $newImg \
         $newImg
         #-draw "text 0,0 'Gode minner'" \
 
+echo $newImg
+sleep 1
+yad --width 300 --image=$newImg;
+
+
+
 
    
