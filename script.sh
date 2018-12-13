@@ -12,8 +12,9 @@ resolution=$(identify $newImg | awk '{print $4}')
 #echo $resolution
 
 echo $newimg 
+#-crop '640x640+5+10' \
 convert $newImg -level 2%,98%,0.5 \
-        -crop '640x640+5+10' \
+        -resize 640x640 \
         $newImg 
 
 #echo $(identify $newImg | awk '{print $4}')
