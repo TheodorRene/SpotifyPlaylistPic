@@ -1,40 +1,34 @@
 #! /bin/bash
+set -e
 
 img=$1
 text=$2
+size=$3
 
-cp $img "PlaylistImage$img"
+if [ -z "$img" ]
+then
+    echo "[File][text][textsize]"
+    exit 0
+fi
+
+if [ -z "$size" ] || [ -z "$text" ]
+then 
+    echo "Missing arguments"
+    exit 0
+fi
+
+
 newImg="PlaylistImage$img"
+cp $img $newImg
 
-
-#Adding constrast
-resolution=$(identify $newImg | awk '{print $4}')
-#echo $resolution
-
-echo $newimg 
-#-crop '640x640+5+10' \
 convert $newImg -level 2%,98%,0.5 \
         -resize 640x640 \
-        $newImg 
-
-#echo $(identify $newImg | awk '{print $4}')
-
-echo $newimg
-
-convert $newImg \
         -gravity Center \
-        -pointsize 72 \
+        -pointsize $size \
         -fill white \
-        -font Proxima-Nova-Alt-Reg \
+        -font Proxima-Nova-Alt-Bold \
         -annotate 0 $text \
         $newImg
-        #-draw "text 0,0 'Gode minner'" \
 
 echo $newImg
-sleep 1
-yad --width 300 --image=$newImg;
-
-
-
-
-   
+exit 1
